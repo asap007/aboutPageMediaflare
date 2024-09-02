@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGlobe } from 'react-icons/fa';
 
 const AboutPage = () => {
@@ -19,6 +19,11 @@ const AboutPage = () => {
       icon: '🔍',
     },
     {
+      title: 'Brand Strategy',
+      description: 'Develop a strong brand identity and strategy that sets you apart from the competition.',
+      icon: '🎨',
+    },
+    {
       title: 'Social Media Management',
       description: 'Engage with your audience and grow your brand on social media platforms with our expert management services.',
       icon: '📱',
@@ -29,8 +34,18 @@ const AboutPage = () => {
       icon: '✍️',
     },
     {
-      title: 'Brand Strategy',
-      description: 'Develop a strong brand identity and strategy that sets you apart from the competition.',
+      title: 'UI/UX Design',
+      description: 'Design intuitive user interfaces and experiences that keep your customers engaged.',
+      icon: '🖌️',
+    },
+    {
+      title: 'Product Design',
+      description: 'Transform your ideas into successful products with our expert design services.',
+      icon: '📦',
+    },
+    {
+      title: 'Graphic Design',
+      description: 'Create visually stunning graphics that communicate your brand message effectively.',
       icon: '🎨',
     },
   ];
@@ -44,7 +59,9 @@ const AboutPage = () => {
 
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-gray-200 to-gray-100 py-4 text-center">
-        <h1 className="text-5xl font-extrabold mb-4 text-gray-900">Welcome to Mediaflare</h1>
+        <h1 className="text-2xl md:text-4xl lg:text-6xl sm:text-5xl font-extrabold mb-4 text-gray-900">
+          <TypingAnimation />
+        </h1>
         <p className="text-xl text-gray-700">
           Elevating your brand through innovative digital solutions.
         </p>
@@ -133,6 +150,40 @@ const AboutPage = () => {
         </div>
       </footer>
     </div>
+  );
+};
+
+const TypingAnimation = () => {
+  const texts = ["Hi, thanks for visiting", "Welcome to Mediaflare"];
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [delay, setDelay] = useState(150);
+
+  useEffect(() => {
+    if (subIndex === texts[index].length + 1 && !isDeleting) {
+      setTimeout(() => setIsDeleting(true), 1000);
+      return;
+    }
+
+    if (subIndex === 0 && isDeleting) {
+      setIsDeleting(false);
+      setIndex((prev) => (prev + 1) % texts.length);
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      setSubIndex((prev) => prev + (isDeleting ? -1 : 1));
+      setDelay(isDeleting ? 75 : 150);
+    }, delay);
+
+    return () => clearTimeout(timeout);
+  }, [subIndex, isDeleting]);
+
+  return (
+    <span className="inline-block border-r-4 border-gray-900 whitespace-nowrap">
+      {`${texts[index].substring(0, subIndex)}`}
+    </span>
   );
 };
 
