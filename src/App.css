@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: 'termina';
+    src: url('./fonts/Termina-Regular.woff2') format('truetype');
+  }
