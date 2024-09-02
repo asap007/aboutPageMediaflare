@@ -154,7 +154,7 @@ const AboutPage = () => {
 };
 
 const TypingAnimation = () => {
-  const texts = ["Hi, thanks for visiting", "Welcome to Mediaflare"];
+  const texts = ["Hi, nice to meet you!", "Welcome to Mediaflare"];
   const [index, setIndex] = useState(0);
   const [subIndex, setSubIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
